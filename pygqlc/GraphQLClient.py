@@ -225,6 +225,10 @@ class GraphQLClient:
         print(f'original message: {e}')
         self.wss_conn_halted = True
         continue
+      except websocket.WebSocketConnectionClosedException as e:
+        print(f'original message: {e}')
+        self.wss_conn_halted = True
+        continue
       if message['type'] == 'data':
         _id = py_.get(message, 'id')
         self.subs[_id]['queue'].append(message)
